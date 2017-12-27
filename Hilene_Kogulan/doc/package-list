@@ -1,0 +1,7 @@
+com.formation.proxibanque.bean
+com.formation.proxibanque.model
+com.formation.proxibanque.persistance
+com.formation.proxibanque.presentation
+com.formation.proxibanque.service
+com.formation.proxibanque.test
+com.formation.proxibanque.util

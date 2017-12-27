@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="styleheader.css" />
+<title>Login</title>
+</head>
+<body>
+	<p>ProxiBanque</p>
+
+	<form action="ServletLogin" method="post">
+		<h1>
+			<img src="logo.png"
+				alt="Logo de ProxiBanque"
+				height="200px" width="300px"/>
+		</h1>
+		<fieldset id="inputs">
+			<input id="login" type="text" name = "login" placeholder="nom de l'utilisateur" autofocus
+				required> <input id="password" type="password" name = "password"
+				placeholder="mot de passe" required>
+		</fieldset>
+		<fieldset id="actions">
+			<input type="submit" id="submit" value="se connecter">
+
+		</fieldset>
+	</form>
+
+</body>
+</html>

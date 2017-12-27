@@ -1,0 +1,111 @@
+************************************
+ Description de l'application:  
+************************************
+
+La banque ProxiBanque souhaite créer une application permettant à ses conseillers de gérer leurs 
+clients et services à forte valeur ajoutée, comme le service de virement compte à compte.
+
+************************************
+Description fonctionnelle détaillée. 
+************************************
+
+Gestion login/password authentifie la connexion des conseillers à leurs espace personnelles.
+
+*Vos identifiants de connexion sont:
+Login: Yann
+Mdp: password
+
+1.La "page d'accueil" comporte la liste des clients du conseiller.
+	1.1 Chaque conseiller peut visualiser l'ensemble de ses clients
+	1.2 Effectuer un virement du virement compte à compte
+	1.3 Utilisateur peut mettre à jour les informations du client.
+	(1.4 Le conseiller peut voir la liste des comptes disponibles : épargne ou courant)
+
+
+************************************
+Description technique détaillée. 
+************************************
+
+L'application ProxibanqueV_2 est composée de 7 couches
+-com.formation.proxibanque.bean
+-com.formation.proxibanque.model
+-com.formation.proxibanque.persistance
+-com.formation.proxibanque.presentation
+-com.formation.proxibanque.service
+-com.formation.proxibanque.test
+-com.formation.proxibanque.util
+
+**com.formation.proxibanque.model: regroupe les classes  métiers:
+	1.Client
+	2.Compte
+	3.CompteEpargne
+	4.CompteCourant
+	5.Conseiller
+	6.Employe
+	7.Gerant
+	8.TypeClient (Enum: Particulier/Entreprise)
+
+**com.formation.proxibanque.persistance: contient les fichiers Dao faisant le lien entre la couche d'accès aux données et la couche métier de l'application, 
+	1.IDaoCrud est une interface générique comportant les méthodes CRUD (Insert, update, delete, selectById et selectAll)
+	2.DaoClient implemente toutes les méthodes de IDaoCrud 
+	3.DaoCompteCourant en addition aux méthodes génériques, cette DAO a une méthode permettant de recuperer les comptes *Courant* via identifiant du Client (selectByIdClient) 
+	4.DaoCompteEpargne nte toutes les méthodes de IDaoCrud 
+	3.DaoCompteCourant en addition aux méthodes génériques, cette DAO a une méthode permettant de recuperer les comptes *Epargne* via identifiant du Client (selectByIdClient) 
+	5.DaoConseiller en addition aux méthodes génériques, la DAO Conseiller permet 
+		5.1 de retourner un Client via Identifiant Client passé en parametres.
+		5.2 d'ajouter un client à la responsabilité d'un conseiller
+		5.3 de retourner la liste complete des clients sous la responsabilité d'un Conseiller (idConseiller passer en paramètres)	
+ 
+**com.formation.proxibanque.presentation: contient les servlets:
+	1.ServletAjouterClient : Recuperer les données saisies par l'utilisateur via la méthode POST dans la JSP (ajouterClient.jsp), appel la méthode insert(Client c), et redirige vers les pages de Validation ou d'echec
+	2.ServletAjouterCompte : Enregistrer dans la BDD un compte courant ET/OU un compte epargne et redirige vers les pages de Validation ou d'echec
+	3.ServletListClient : (En developpement)
+	4.ServletLogin : Service de l'authentification qui cherche l'information relative aux Conseillers dans le DAO, si le login et le mdp correspondent, utilisateur est rediriger vers sa page personnelles, sinon une page "échec d'autentification s'affiche et invite l'utilisateur à resaisir ces identificants
+	5.ServletModifClient : Recuperer l'ensemble des informations issues de la JSP (modifierClient.jsp) relatives au Client, le compte courant et le compte epargne
+	6.ServletVirement: Appel la méthode permettant d'effectuer le virement en un Compte courant et un Compte Epargne
+
+**com.formation.proxibanque.util: regroupe les méthodes statiques seConnecter et seDeconnecter permettant de communiquer avec la BDD proxibanquehiko
+
+
+************************************
+Documentation:			  
+************************************
+La documentation se trouve dans 'doc/' puis ouvrez le fichier index.html
+
+
+************************************
+Execution de l'application:    	
+************************************
+Les indications à suivre:
+	1.Creer une base de données dans PHPMyAdmin nommée "proxibanquehiko".
+	2.Excuter le script SQL (proxibanquehiko.sql) se trouvant dans '/SQL''
+	3.Verifier que la base de donnée contient bien 4 tables:
+		1.client
+		2.comptecourant
+		3.compteepargne
+		4.conseiller
+	4.Dans Eclipse, import le contenu du dossier '/Projet'
+		4.1.Fichier import>Existing Projects into Workspace>Selectionner l'emplacement du projet>Finish
+		4.2.Executer le fichier index.html >clic droit sur le fichier>Run As>Run on the Serveur
+	5.Dans la page login saisissez vos coordonnées :
+		-Login: Yann
+		-MotdePasse: password
+
+************************
+	Livrables :  
+************************
+Liste des livrables:
+
+1/ Conception 
+_UML (diagramme de Classes/diagramme d'activites/diagramme de deploiement) 
+_Ecrans de navigation de l'application
+
+2/ Realisation 
+_Code de l'Application (/projet/Proxibanque/)
+_Documentation Javadoc (/doc)
+_Fichier SQL (creation bdd /SQL)
+_Capture d'ecrans de l'application executee dans le navigateur Firefox (/Interface) 
+
+
+
+
